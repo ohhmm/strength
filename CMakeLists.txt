@@ -28,6 +28,7 @@ FetchContent_MakeAvailable(openmind)
 add_library(crc16 STATIC crc16.cpp)
 target_include_directories(crc16 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(crc16 PRIVATE openmind)
+target_include_directories(crc16 PRIVATE ${openmind_SOURCE_DIR})
 
 if(BUILD_TESTS OR OPENMIND_BUILD_TESTS)
     enable_testing()
