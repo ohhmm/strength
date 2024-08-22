@@ -1,6 +1,7 @@
 #include <cstdint>
 #include <array>
 #include <omnn/math/Valuable.h>
+#include <omnn/math/Integer.h>
 
 class CRC16 {
 public:
