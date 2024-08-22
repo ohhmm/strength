@@ -14,7 +14,7 @@ public:
         omnn::math::Valuable crc = 0;
         for (size_t i = 0; i < length; ++i) {
             auto temp = (crc >> 8) ^ data[i];
-            crc = (crc << 8) ^ table[temp.as<omnn::math::Integer>().ca() & 0xFF];
+            crc = crc.Shl(8) ^ table[temp.as<omnn::math::Integer>().ca() & 0xFF];
         }
         return crc;
     }
@@ -24,13 +24,13 @@ private:
 
     void generateTable() {
         for (int i = 0; i < 256; ++i) {
-            omnn::math::Valuable crc = omnn::math::Valuable(i) << 8;
+            omnn::math::Valuable crc = omnn::math::Valuable(i).Shl(8);
             for (int j = 0; j < 8; ++j) {
                 auto msb = (crc >> 15) & 1;
                 if (msb.as<omnn::math::Integer>().ca() != 0) {
-                    crc = (crc << 1) ^ POLYNOMIAL;
+                    crc = crc.Shl(1) ^ POLYNOMIAL;
                 } else {
-                    crc <<= 1;
+                    crc = crc.Shl(1);
                 }
             }
             table[i] = crc;
